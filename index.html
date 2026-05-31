@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Andrea y Alejandro</title>
+    <style>
+        /* Estilos Generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #113322; /* Fondo verde oscuro armónico */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Pantalla de Bienvenida (Intro) */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b2216;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 1s ease, visibility 1s;
+        }
+        #intro-overlay img {
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+        .click-to-enter {
+            position: absolute;
+            bottom: 10%;
+            background: rgba(255, 255, 255, 0.85);
+            color: #113322;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Contenedor Principal de la Invitación */
+        .invitation-container {
+            width: 100%;
+            max-width: 500px; /* Optimizado para emular pantalla de celular */
+            position: relative;
+            background: #fffdf9;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* Bloques de Imagen */
+        .card-section {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contador Regresivo */
+        .countdown-container {
+            background: #fffdf9;
+            padding: 25px 10px;
+            text-align: center;
+            color: #bc964a; /* Tono dorado */
+        }
+        .countdown-title {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #113322;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .time-block {
+            background: #113322;
+            color: #fffdf9;
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 70px;
+            border: 1px solid #bc964a;
+        }
+        .time-block span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .time-block label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Botones Interactivos Superpuestos */
+        .btn-overlay {
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+            z-index: 10;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn-overlay:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        /* Botón Ver Ubicación (En la sección de la fecha/lugar) */
+        .btn-location-waze {
+            bottom: 5.5%;
+            left: 32%;
+            width: 35%;
+            height: 5%;
+            /* background: rgba(255,0,0,0.3); /* Descomenta para calibrar posición */
+        }
+        .btn-location-maps {
+            bottom: 5.5%;
+            left: 68%;
+            width: 35%;
+            height: 5%;
+            /* background: rgba(0,0,255,0.3); */
+        }
+
+        /* Botón Confirmar Asistencia (En la sección de lluvia de sobres) */
+        .btn-rsvp {
+            bottom: 12.5%;
+            width: 76%;
+            height: 6.5%;
+            border-radius: 15px;
+            /* background: rgba(0,255,0,0.3); */
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta elementos de audio.
+    </audio>
+
+    <div id="intro-overlay" onclick="startInvitacion()">
+        <img src="invitacion.png" alt="Portada Invitación">
+        <div class="click-to-enter">Toca para abrir la invitación 🎵</div>
+    </div>
+
+    <div class="invitation-container">
+
+        <div class="card-section">
+            <img src="invitacion.png" alt="Portada">
+        </div>
+
+        <div class="card-section">
+            <img src="lugar.png" alt="Fecha y Lugar">
+            <a href="https://ul.waze.com/ul?venue_id=187301936.1872888291.12610359&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" class="btn-overlay btn-location-waze" title="Ir con Waze"></a>
+            <a href="http://maps.google.com/?q=Hacienda+Absalon" target="_blank" class="btn-overlay btn-location-maps" title="Ir con Google Maps"></a>
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-title">Faltan muy pocos días</div>
+            <div class="countdown">
+                <div class="time-block"><span id="days">00</span><label>Días</label></div>
+                <div class="time-block"><span id="hours">00</span><label>Horas</label></div>
+                <div class="time-block"><span id="minutes">00</span><label>Min</label></div>
+                <div class="time-block"><span id="seconds">00</span><label>Seg</label></div>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <img src="happy toguether.png" alt="Happy Together">
+        </div>
+
+        <div class="card-section">
+            <img src="codigo.png" alt="Código de Vestimenta">
+        </div>
+
+        <div class="card-section">
+            <img src="lluvia de sobres.png" alt="Lluvia de sobres">
+            <a href="https://forms.google.com/TU_LINK_DE_FORMS_AQUI" target="_blank" class="btn-overlay btn-rsvp"></a>
+        </div>
+
+    </div>
+
+    <script>
+        // Función para quitar la portada y activar la reproducción musical
+        function startInvitacion() {
+            const overlay = document.getElementById('intro-overlay');
+            const music = document.getElementById('bg-music');
+            
+            // Ocultar pantalla de bienvenida
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            
+            // Intentar reproducir audio
+            music.play().catch(error => {
+                console.log("La autoreproducción requiere interacción del usuario previa:", error);
+            });
+        }
+
+        // Cuenta Regresiva: Configurada para el 25 de Septiembre de 2026 a las 15:00 (3:00 PM)
+        const weddingDate = new Date("Sep 25, 2026 15:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".countdown-container").innerHTML = "<div class='countdown-title' style='font-weight:bold;'>¡Llegó el gran día! 🥂</div>";
+                return;
+            }
+
+            // Cálculos de tiempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Renderizar con ceros a la izquierda
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+        }, 1000);
+    </script>
+</body>
+</html>
