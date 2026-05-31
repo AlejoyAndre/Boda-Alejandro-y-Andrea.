@@ -12,7 +12,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #113322; /* Fondo verde oscuro armónico */
+            background-color: #113322;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Pantalla de Bienvenida (Intro) */
+        /* Pantalla de Bienvenida (Intro Overlay) */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -43,13 +43,13 @@
         .click-to-enter {
             position: absolute;
             bottom: 10%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             color: #113322;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 30px;
             font-weight: bold;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             animation: pulse 2s infinite;
         }
 
@@ -59,16 +59,15 @@
             100% { transform: scale(1); }
         }
 
-        /* Contenedor Principal de la Invitación */
+        /* Contenedor Principal */
         .invitation-container {
             width: 100%;
-            max-width: 500px; /* Optimizado para emular pantalla de celular */
+            max-width: 500px;
             position: relative;
             background: #fffdf9;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
         }
 
-        /* Bloques de Imagen */
         .card-section {
             position: relative;
             width: 100%;
@@ -84,9 +83,9 @@
         /* Contador Regresivo */
         .countdown-container {
             background: #fffdf9;
-            padding: 25px 10px;
+            padding: 30px 10px;
             text-align: center;
-            color: #bc964a; /* Tono dorado */
+            color: #bc964a;
         }
         .countdown-title {
             font-size: 1.1rem;
@@ -94,18 +93,19 @@
             letter-spacing: 2px;
             margin-bottom: 15px;
             color: #113322;
+            font-weight: 600;
         }
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
         }
         .time-block {
             background: #113322;
             color: #fffdf9;
-            padding: 10px;
+            padding: 12px 10px;
             border-radius: 8px;
-            min-width: 70px;
+            min-width: 72px;
             border: 1px solid #bc964a;
         }
         .time-block span {
@@ -114,51 +114,42 @@
             font-weight: bold;
         }
         .time-block label {
-            font-size: 0.75rem;
+            display: block;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 2px;
         }
 
-        /* Botones Interactivos Superpuestos */
+        /* Botones Invisibles */
         .btn-overlay {
             position: absolute;
-            transform: translateX(-50%);
-            left: 50%;
             z-index: 10;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-        .btn-overlay:active {
-            transform: translateX(-50%) scale(0.95);
+            cursor: pointer;
         }
 
-        /* Botón Ver Ubicación (En la sección de la fecha/lugar) */
+        /* Botones Ubicación (Waze e Instagram/Maps) */
         .btn-location-waze {
-            bottom: 5.5%;
-            left: 32%;
-            width: 35%;
-            height: 5%;
-            /* background: rgba(255,0,0,0.3); /* Descomenta para calibrar posición */
+            bottom: 3.5%;
+            left: 10%;
+            width: 38%;
+            height: 7%;
         }
         .btn-location-maps {
-            bottom: 5.5%;
-            left: 68%;
-            width: 35%;
-            height: 5%;
-            /* background: rgba(0,0,255,0.3); */
+            bottom: 3.5%;
+            right: 10%;
+            width: 38%;
+            height: 7%;
         }
 
-        /* Botón Confirmar Asistencia (En la sección de lluvia de sobres) */
+        /* Botón Confirmar Asistencia */
         .btn-rsvp {
-            bottom: 12.5%;
-            width: 76%;
-            height: 6.5%;
-            border-radius: 15px;
-            /* background: rgba(0,255,0,0.3); */
+            bottom: 11.5%;
+            left: 11%;
+            width: 78%;
+            height: 7.5%;
+            border-radius: 18px;
         }
     </style>
 </head>
@@ -166,24 +157,23 @@
 
     <audio id="bg-music" loop>
         <source src="musica.mp3" type="audio/mpeg">
-        Tu navegador no soporta elementos de audio.
     </audio>
 
     <div id="intro-overlay" onclick="startInvitacion()">
-        <img src="invitacion.png" alt="Portada Invitación">
+        <img src="portada.png" onerror="this.src='portada.PNG'" alt="Portada Invitación">
         <div class="click-to-enter">Toca para abrir la invitación 🎵</div>
     </div>
 
     <div class="invitation-container">
 
         <div class="card-section">
-            <img src="invitacion.png" alt="Portada">
+            <img src="portada.png" onerror="this.src='portada.PNG'" alt="Portada">
         </div>
 
         <div class="card-section">
-            <img src="lugar.png" alt="Fecha y Lugar">
+            <img src="fecha.png" onerror="this.src='fecha.PNG'" alt="Fecha y Lugar">
             <a href="https://ul.waze.com/ul?venue_id=187301936.1872888291.12610359&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" class="btn-overlay btn-location-waze" title="Ir con Waze"></a>
-            <a href="http://maps.google.com/?q=Hacienda+Absalon" target="_blank" class="btn-overlay btn-location-maps" title="Ir con Google Maps"></a>
+            <a href="https://maps.google.com/?q=Hacienda+Absalon" target="_blank" class="btn-overlay btn-location-maps" title="Ir con Google Maps"></a>
         </div>
 
         <div class="countdown-container">
@@ -197,37 +187,36 @@
         </div>
 
         <div class="card-section">
-            <img src="happy toguether.png" alt="Happy Together">
+            <img src="happy toguether.png" onerror="this.src='happy toguether.PNG'" alt="Happy Together">
         </div>
 
         <div class="card-section">
-            <img src="codigo.png" alt="Código de Vestimenta">
+            <img src="codigo.png" onerror="this.src='codigo.PNG'" alt="Código de Vestimenta">
         </div>
 
         <div class="card-section">
-            <img src="lluvia de sobres.png" alt="Lluvia de sobres">
+            <img src="lluvia de sobres.png" onerror="this.src='lluvia de sobres.PNG'" alt="Lluvia de sobres">
             <a href="https://forms.google.com/TU_LINK_DE_FORMS_AQUI" target="_blank" class="btn-overlay btn-rsvp"></a>
         </div>
 
     </div>
 
     <script>
-        // Función para quitar la portada y activar la reproducción musical
         function startInvitacion() {
             const overlay = document.getElementById('intro-overlay');
             const music = document.getElementById('bg-music');
             
-            // Ocultar pantalla de bienvenida
             overlay.style.opacity = '0';
-            overlay.style.visibility = 'hidden';
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+            }, 1000);
             
-            // Intentar reproducir audio
             music.play().catch(error => {
-                console.log("La autoreproducción requiere interacción del usuario previa:", error);
+                console.log("Audio play prevenido:", error);
             });
         }
 
-        // Cuenta Regresiva: Configurada para el 25 de Septiembre de 2026 a las 15:00 (3:00 PM)
+        // Cuenta regresiva 25 Sep 2026 3:00 PM
         const weddingDate = new Date("Sep 25, 2026 15:00:00").getTime();
 
         const timer = setInterval(function() {
@@ -240,18 +229,15 @@
                 return;
             }
 
-            // Cálculos de tiempo
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Renderizar con ceros a la izquierda
             document.getElementById("days").innerText = days < 10 ? "0" + days : days;
             document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
             document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
             document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-
         }, 1000);
     </script>
 </body>
