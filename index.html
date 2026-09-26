@@ -114,6 +114,7 @@
             transition: transform 0.2s, background-color 0.2s;
             width: 80%;
             max-width: 280px;
+            margin-bottom: 15px;
         }
         .btn-youtube:hover {
             background-color: #cc0000;
@@ -123,6 +124,25 @@
             width: 22px;
             height: 22px;
             fill: currentColor;
+        }
+
+        /* Estilos para el aviso de Spotify */
+        .spotify-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #444;
+            text-align: left;
+            padding: 0 10px;
+        }
+        .spotify-notice svg {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            fill: #1DB954;
         }
 
         /* Contador Regresivo */
@@ -223,18 +243,26 @@
             <img src="portada.png" onerror="this.src='portada.PNG'" alt="Portada">
         </div>
 
-        <!-- Imagen del Single (PORTADA SINGLE.jpg) -->
+        <!-- Imagen de la Canción / Single (PORTADA SINGLE.jpg) -->
         <div class="card-section">
             <img src="PORTADA SINGLE.jpg" onerror="this.src='portada.png'" alt="Portada Single">
         </div>
 
-        <!-- Sección de YouTube con botón elegante -->
+        <!-- Sección de YouTube con botón elegante y aviso de Spotify -->
         <div class="youtube-section">
-            <div class="youtube-title">Escucha nuestra canción </div>
+            <div class="youtube-title">Escucha nuestra canción</div>
             <a href="https://youtu.be/QUMn2W194l4" target="_blank" class="btn-youtube">
                 <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 Ver en YouTube
             </a>
+
+            <!-- Aviso de Próximamente en Spotify con logo -->
+            <div class="spotify-notice">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.599-.12-.42.18-.78.6-.9 4.56-1.02 8.52-.6 11.76 1.44.36.24.48.72.221 1.06zm1.44-3.9c-.301.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.41-.48.18-1.02-.06-1.2-.54-.18-.48.06-1.02.54-1.2 4.2-1.26 9.6-.6 13.44 1.8.42.24.6.78.42 1.25zm.12-4.08C14.4 7.32 8.34 7.14 4.86 8.16c-.54.18-1.14-.12-1.32-.66-.18-.54.12-1.14.66-1.32 4.08-1.26 10.8-1.08 14.76 1.32.54.36.72 1.08.36 1.62-.36.54-1.08.72-1.62.36z"/>
+                </svg>
+                <span>Próximamente podrás disfrutar de nuestra canción en Spotify, Apple Music y todas las plataformas digitales.</span>
+            </div>
         </div>
 
         <div class="card-section">
