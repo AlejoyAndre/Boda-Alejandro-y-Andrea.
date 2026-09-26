@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Pantalla de Bienvenida (Intro Overlay) con la nueva imagen */
+        /* Pantalla de Bienvenida (Intro Overlay) con la portada original */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -210,14 +210,20 @@
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Pantalla de Bienvenida con PORTADA SINGLE.jpg -->
+    <!-- Pantalla de Bienvenida con la portada original -->
     <div id="intro-overlay" onclick="startInvitacion()">
-        <img src="PORTADA SINGLE.jpg" onerror="this.src='portada.png'" alt="Portada Single">
+        <img src="portada.png" onerror="this.src='portada.PNG'" alt="Portada Invitación">
         <div class="click-to-enter">Toca para abrir la invitación 🎵</div>
     </div>
 
     <div class="invitation-container">
 
+        <!-- Portada dentro de la página -->
+        <div class="card-section">
+            <img src="portada.png" onerror="this.src='portada.PNG'" alt="Portada">
+        </div>
+
+        <!-- Imagen del Single (PORTADA SINGLE.jpg) -->
         <div class="card-section">
             <img src="PORTADA SINGLE.jpg" onerror="this.src='portada.png'" alt="Portada Single">
         </div>
